@@ -1,0 +1,60 @@
+<div class="mat-elevation-z20">
+
+    <h1 class="h-1">Інформація про користувачів</h1>
+    <table mat-table [dataSource]="userAll">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="last_name">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="first_name">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="birth_date">
+            <th mat-header-cell *matHeaderCellDef> Birth Date </th>
+            <td mat-cell *matCellDef="let element"> {{ dateFormatNotTime(element.birth_date) }} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="registration_date">
+            <th mat-header-cell *matHeaderCellDef> Registration Date </th>
+            <td mat-cell *matCellDef="let element"> {{ dateFormat(element.registration_date)}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="ip_adress">
+            <th mat-header-cell *matHeaderCellDef> Ip Aderess</th>
+            <td mat-cell *matCellDef="let element"> {{inet_ntoa(element.ip_adress)}} </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

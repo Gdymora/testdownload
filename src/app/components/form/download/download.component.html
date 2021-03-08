@@ -1,0 +1,28 @@
+<form class="example-form" [formGroup]="formModel" novalidate>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>User Id</mat-label>
+        <mat-select formControlName="user_id">
+            <mat-option disabled>select status</mat-option>
+            <mat-option *ngFor="let c of user" [value]="c.id">{{c.id}}</mat-option>
+        </mat-select>
+        <mat-hint>Errors appear instantly!</mat-hint>
+    </mat-form-field>
+    <!--  -->
+   <div *ngFor="let file of myFiles">
+        <div>* {{file.name}} - {{file.type}} - {{file.size}}</div>
+    </div> 
+    <div class="file">
+        <button type="submit" (click)="formModelReset()" color="accent" mat-flat-button class="btn">Clear</button>
+        <button type="submit" (click)="createOrUpdatePolicy()" color="primary" mat-flat-button class="btn">Add</button>
+        <input hidden="true" type="file" id="file-input" accept="image/jpeg, ,image/png, image/jpg, application/pdf"
+            formControlName="file" (change)="handleFileInput($event)" multiple="true" required>
+        <label for="file-input">
+            <a mat-flat-button color="primary" class="btn"><i class="material-icons">file_upload</i>
+                Загрузить файл
+            </a>
+        </label>
+    </div>
+
+
+</form>

@@ -1,0 +1,44 @@
+<form class="example-form" [formGroup]="userFormModel" novalidate>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>First Name</mat-label>
+        <input type="text" matInput formControlName="firstName" placeholder="firstName">
+        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-error *ngIf="checkError('firstName', 'required')">Shop Address is required</mat-error>
+        <mat-error *ngIf="checkError('firstName', 'email')">Shop Address should be less than 200 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-error *ngIf="checkError('email', 'required')">Shop Address is required</mat-error>
+        <mat-error *ngIf="checkError('email', 'email')">Shop Address should be less than 200 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Birth Date</mat-label>
+        <input type="date" matInput formControlName="birthDate" min="1940-01-01" max="2014-12-31"
+            placeholder="Birth Date">
+        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-error *ngIf="checkError('birthDate', 'required')">Shop Address is required</mat-error>
+        <mat-error *ngIf="checkError('birthDate', 'email')">Shop Address should be less than 200 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Status</mat-label>
+        <mat-select  formControlName="status">
+            <mat-option disabled>select status</mat-option>
+            <mat-option *ngFor="let c of statusLabel" [value]="c">{{c}}</mat-option>
+        </mat-select>
+
+        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-error *ngIf="checkError('status', 'required')">Shop Address is required</mat-error>
+        <mat-error *ngIf="checkError('status', 'email')">Shop Address should be less than 200 characters</mat-error>
+    </mat-form-field>
+
+    <div class="form-group pt-4 text-center">
+        <button type="reset" (click)="formModelReset()" mat-flat-button color="accent" class="btn">Clear</button>
+        <button type="submit" (click)="onSearchUser()" mat-flat-button  color="primary" class="btn">Search</button>
+    </div>
+</form>

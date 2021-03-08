@@ -1,0 +1,97 @@
+<div class="user-info">
+    <div>
+        <button style="float: left; margin-right: 1em;" class="button-menu" mat-mini-fab color="primary" mat-button>
+            <span class="material-icons md-24 md-light"> manage_search </span>
+        </button>
+
+        <h1 style="display: inline;">Форма пошуку</h1>
+        <p>Здійснюється пошук файлів</p>
+    </div>
+    <app-user></app-user>
+</div>
+
+<div *ngIf="userFile.error" class="alert">
+    <p>
+        {{userFile.error}}
+    </p>
+</div>
+
+<app-user-all-table></app-user-all-table>
+
+<div *ngIf="userFile.user_file" class="mat-elevation-z20">
+
+    <h1 class="h-1">Інформація про файли користувачів</h1>
+    <table mat-table [dataSource]="userFile.user_file">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="file_name">
+            <th mat-header-cell *matHeaderCellDef> File name </th>
+            <td mat-cell *matCellDef="let element"> {{element.file_name}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="original_name">
+            <th mat-header-cell *matHeaderCellDef> File name </th>
+            <td mat-cell *matCellDef="let element"> {{element.original_name}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="mime">
+            <th mat-header-cell *matHeaderCellDef> Mime </th>
+            <td mat-cell *matCellDef="let element"> {{element.mime}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="size">
+            <th mat-header-cell *matHeaderCellDef> Size </th>
+            <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="destination">
+            <th mat-header-cell *matHeaderCellDef> Destination </th>
+            <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="user_id">
+            <th mat-header-cell *matHeaderCellDef> User Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.user_id}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="date_create">
+            <th mat-header-cell *matHeaderCellDef> Date Create </th>
+            <td mat-cell *matCellDef="let element"> {{dateFormat(element.date_create)}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef>View</th>
+            <td mat-cell *matCellDef="let element"> <button (click)="viewId(element.id)" mat-flat-button color="primary"
+                    class="btn"><i class="material-icons">image</i></button></td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="download">
+            <th mat-header-cell *matHeaderCellDef> Download</th>
+            <td mat-cell *matCellDef="let element"> <button (click)="showId(element.id)" mat-flat-button color="primary"
+                    class="btn"><i class="material-icons">file_download</i></button></td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+<h2>View image</h2>
+<img [src]="vievimage">

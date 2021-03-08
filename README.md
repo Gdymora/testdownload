@@ -1,27 +1,23 @@
-# TestSmida
+# Простой файловый сервер дающий возможность создавать пользователей, загружать файлы, осуществлять поиск пользователей  с возможностью просмотра и скачивания загруженных ними файлов.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
+# Развернуть приложение в режиме разработки:
+1. скачать приложение
+2.  если node.js не установлено, то необходимо установить 
+3. создать базу MySQL и загрузить дамп базы  с каталога SQL
+4. необходимо в корне проекта создать файл .ENV со следующим содержимым:
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=root
+DB_BASE=user_file
+PORT=3000
 
-## Development server
+4.  в консоли перейти в каталог приложения и запустить команду npm run devserver или запустить сервер бекенда (npm run te) и сервер клиента (ng serve) в отдельных терминалах
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+Для запуска в режиме boild необходимо наличие сервера Apache, NgNix или любого другого сервера. Запустить приложение командой npm run server и перейти по адресу 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Описание вкладок
+Создать пользователя можно во вкладке Admin panel
+Загрузить файл можно во вкладке assignment
+Осуществить просмотр или скачивание файлов можно во вкладке User search
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

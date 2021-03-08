@@ -1,0 +1,14 @@
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+.example-form {
+   width: 50vmin;
+   width: 50vmax;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .example-form .btn  {
+    margin: 8px 8px 8px 0;
+  }
