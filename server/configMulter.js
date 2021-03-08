@@ -16,7 +16,8 @@ module.exports = async function (app, multer, express) {
     });
 
     const limits = {
-        fileSize: 400000
+        fieldNameSize: 100,
+        fileSize: 10 * 1024 * 1024 //10мб
     }
 
     const fileFilter = (req, file, cb) => {
@@ -30,8 +31,8 @@ module.exports = async function (app, multer, express) {
             cb(null, false);
         }
     }
-    //.single("userfile")
-    app.use(express.static(__dirname));
+
+    app.use('/resources-file/',express.static(__dirname + '/uploads/files'));
     app.use(multer({ storage: storageConfig, fileFilter: fileFilter, limits: limits }).array('fieldname'));
 };
 

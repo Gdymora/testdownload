@@ -1,39 +1,42 @@
 'use strict';
 module.exports = async function (app, body, validationResult) {
-    var path = require('path');
-    var mime = require('mime');
-    var fs = require('fs');
+    let path = require('path');
+    let mime = require('mime');
+    let fs = require('fs');
+    const ImageKit = require("imagekit");
     const connection = await require('../db');
     const DataProviderMySQL = require('./DataProviderMySQL').DataProviderMySQL;
     const dataProvider = new DataProviderMySQL();
 
-    app.get('/', function (req, res, next) {      
+    app.get('/', function (req, res, next) {
         dataProvider.getMySqlUserALL(connection, res)
     });
 
-    app.get("/image-test", function (req, res, next) {
-        var file = process.cwd() + '/server/uploads/files/1615016936542.jpeg';
-        var filename = path.basename(file);
-        var mimetype = mime.lookup(file);
-        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-        res.setHeader('Content-type', mimetype);
-        var filestream = fs.createReadStream(file);
-        filestream.pipe(res);
+    app.get("/resources-file/:user_id", async function (req, res, next) {
+        let file = await dataProvider.getMySqlUserFile(connection, res, req)
+        let imageURL;
+        file.forEach(element => {
+            console.log(element.id);
+            let file = process.cwd() + '/' + element.destination + '/' + element.file_name;
+            let filename = path.basename(file);
+
+
+        });
+        res.send({ "name": filename});
     });
 
     app.post("/file", function (req, res, next) {
-        console.log(req);
-        var file = process.cwd() + '/' + req.body.destination + '/' + req.body.file_name;
-        var filename = path.basename(file);
-        var mimetype = mime.lookup(file);
+        let file = process.cwd() + '/' + req.body.destination + '/' + req.body.file_name;
+        let filename = path.basename(file);
+        let mimetype = mime.lookup(file);
         res.setHeader('Content-disposition', 'attachment; filename=' + filename);
         res.setHeader('Content-type', mimetype);
-        var filestream = fs.createReadStream(file);
+        let filestream = fs.createReadStream(file);
         filestream.pipe(res);
     });
 
     app.put('/user',
-        body('email').isEmail(), 
+        body('email').isEmail(),
         body('firstName').isLength({ min: 15 }),
         async function (req, res, next) {
             const errors = validationResult(req);

@@ -2,9 +2,24 @@
 module.exports.DataProviderMySQL = function () {
 
     this.getMySqlUserALL = async function (connection, res) {
+
         try {
             const [rows, fields] = await connection.execute("SELECT * FROM `users`");
             res.json(rows);
+        } catch (e) {
+            console.log('caught exception!', e.message);
+            res.json({ result: "error", msg: `"Mysql error:" ${e.message}` });
+        }
+
+    }
+
+    this.getMySqlUserFile = async function (connection, res, req) {
+     
+        try {
+            let sql_user = 'SELECT * FROM `user_files` WHERE `user_id` = ?';
+            let value_user = [req.params.user_id];
+            const [rows_user, fields] = await connection.execute(sql_user, value_user);
+            return rows_user;
         } catch (e) {
             console.log('caught exception!', e.message);
             res.json({ result: "error", msg: `"Mysql error:" ${e.message}` });
@@ -52,7 +67,6 @@ module.exports.DataProviderMySQL = function () {
             } else if (rows.length === 1) {
 
                 let sql_user = 'SELECT * FROM `user_files` WHERE `user_id` = ?';
-                console.log(rows[0].id);
                 let value_user = [rows[0].id];
                 const [rows_user, fields] = await connection.execute(sql_user, value_user);
 
