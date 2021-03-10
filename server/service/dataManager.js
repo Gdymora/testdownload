@@ -3,7 +3,6 @@ module.exports = async function (app, body, validationResult) {
     let path = require('path');
     let mime = require('mime');
     let fs = require('fs');
-    const ImageKit = require("imagekit");
     const connection = await require('../db');
     const DataProviderMySQL = require('./DataProviderMySQL').DataProviderMySQL;
     const dataProvider = new DataProviderMySQL();
@@ -14,15 +13,12 @@ module.exports = async function (app, body, validationResult) {
 
     app.get("/resources-file/:user_id", async function (req, res, next) {
         let file = await dataProvider.getMySqlUserFile(connection, res, req)
-        let imageURL;
-        file.forEach(element => {
-            console.log(element.id);
-            let file = process.cwd() + '/' + element.destination + '/' + element.file_name;
-            let filename = path.basename(file);
-
-
-        });
-        res.send({ "name": filename});
+        let count = 1;
+        let filestream = [];
+        for (const element of file) {
+            console.log(file);
+            //TODO
+        }
     });
 
     app.post("/file", function (req, res, next) {
@@ -33,6 +29,7 @@ module.exports = async function (app, body, validationResult) {
         res.setHeader('Content-type', mimetype);
         let filestream = fs.createReadStream(file);
         filestream.pipe(res);
+
     });
 
     app.put('/user',

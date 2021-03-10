@@ -9,7 +9,7 @@
 
 # dependencies
 /node_modules
-uploads
+/server/uploads/files/*
 .ENV
 
 # profiling files
